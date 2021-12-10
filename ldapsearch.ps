@@ -1,0 +1,8 @@
+Write-Output "Dieses SKript funkoniert nur, wenn das NetCmdlets 2016 installiert ist. Siehe https://www.nsoftware.com/powershell/netcmdlets/download.aspx"
+$Server = "ldap.server.de"
+$Filter = Read-Host "uid?"
+$LDAPCn = Connect-LDAP -Server $Server -Port 389 -Version 3 -Timeout 20
+$DN = "ou=People,dc=company,dc=de"
+Get-LDAP -Connection $LDAPCn -Search "uid=$Filter" -SearchScope wholesubtree -DN $DN
+Disconnect-LDAP -Connection $LDAPCn
+Read-Host "Press any key"
